@@ -1,7 +1,9 @@
 "use client"
 
-import { Phone, Mail, MapPin } from "lucide-react"
+import { useState, useRef } from "react"
+import { Phone, Mail, MapPin, Volume2, VolumeX } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 
 const categories = [
   { id: "sports", name: "खेल", icon: "🏏" },
@@ -13,9 +15,18 @@ const categories = [
 ]
 
 export default function PoliticalPortal() {
+  const [isMuted, setIsMuted] = useState(true)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   const handleCategoryClick = (categoryId: string) => {
     window.location.href = `/yojana/${categoryId}`
+  }
+
+  const toggleMute = () => {
+    if (videoRef.current) {
+      videoRef.current.muted = !isMuted
+      setIsMuted(!isMuted)
+    }
   }
 
   return (
@@ -25,6 +36,7 @@ export default function PoliticalPortal() {
       <section className="relative h-[80vh] bg-gradient-to-r from-primary to-accent overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
         <video
+          ref={videoRef}
           src="/video.mp4"
           className="w-full h-full object-cover"
           autoPlay
@@ -38,6 +50,18 @@ export default function PoliticalPortal() {
             type="video/mp4"
           />
         </video>
+        
+        {/* Unmute Button */}
+        <div className="absolute top-4 right-4">
+          <Button
+            size="sm"
+            className="bg-black/50 hover:bg-black/70 text-white rounded-full p-3"
+            onClick={toggleMute}
+          >
+            {isMuted ? <VolumeX className="w-5 h-5" /> : <Volume2 className="w-5 h-5" />}
+          </Button>
+        </div>
+        
         <div className="absolute bottom-8 left-8 text-white">
           <h2 className="text-4xl text-red-500 font-bold font-playfair mb-2">सबका साथ, सबका विकास</h2>
           <p className="text-xl text-red-500 opacity-90">राष्ट्र निर्माण में आपका योगदान</p>
