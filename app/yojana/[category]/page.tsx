@@ -5,6 +5,7 @@ import { ArrowLeft, Menu, X, Phone, Mail, MapPin, Play, Pause } from "lucide-rea
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { useParams } from "next/navigation"
+import Image from "next/image"
 
 const categories = {
   sports: { name: "खेल", icon: "🏏" },
@@ -170,12 +171,8 @@ export default function YojanaPage() {
               >
                 <ArrowLeft className="w-5 h-5" />
               </Button>
-              <div className="w-12 h-12 bg-primary-foreground rounded-full flex items-center justify-center">
-                <span className="text-primary font-bold text-xl">🕉️</span>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold font-playfair">राजनीतिक पोर्टल</h1>
-                <p className="text-sm opacity-90">सेवा, सुशासन, गरीब कल्याण</p>
+              <div className="w-20 rounded-full h-20 bg-primary-foreground rounded-full flex items-center justify-center">
+                <Image src="/logo.jpg" alt="logo" width={88} height={88} />
               </div>
             </div>
 
