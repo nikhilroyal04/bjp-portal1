@@ -1,7 +1,9 @@
 "use client"
 
-import { Phone, Mail, MapPin } from "lucide-react"
+import { useState, useRef } from "react"
+import { Phone, Mail, MapPin, Play, Pause } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 
 const categories = [
   { id: "sports", name: "खेल", icon: "🏏" },
@@ -13,9 +15,22 @@ const categories = [
 ]
 
 export default function PoliticalPortal() {
+  const [isPlaying, setIsPlaying] = useState(true)
+  const videoRef = useRef<HTMLVideoElement>(null)
 
   const handleCategoryClick = (categoryId: string) => {
     window.location.href = `/yojana/${categoryId}`
+  }
+
+  const toggleVideoPlayback = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause()
+      } else {
+        videoRef.current.play()
+      }
+      setIsPlaying(!isPlaying)
+    }
   }
 
   return (
@@ -25,18 +40,32 @@ export default function PoliticalPortal() {
       <section className="relative h-[80vh] bg-gradient-to-r from-primary to-accent overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
         <video
+          ref={videoRef}
           src="/video.mp4"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover cursor-pointer"
           autoPlay
           loop
           playsInline
           poster="/placeholder.svg?key=2ntg5"
+          onClick={toggleVideoPlayback}
         >
           <source
             src="/video.mp4"
             type="video/mp4"
           />
         </video>
+        
+        {/* Play/Pause Button Overlay */}
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Button
+            size="lg"
+            className="bg-primary/80 hover:bg-primary/90 text-primary-foreground rounded-full p-6 shadow-2xl transition-all duration-300"
+            onClick={toggleVideoPlayback}
+          >
+            {isPlaying ? <Pause className="w-8 h-8" /> : <Play className="w-8 h-8 ml-1" />}
+          </Button>
+        </div>
+        
         <div className="absolute bottom-8 left-8 text-white">
           <h2 className="text-4xl text-red-500 font-bold font-playfair mb-2">सबका साथ, सबका विकास</h2>
           <p className="text-xl text-red-500 opacity-90">राष्ट्र निर्माण में आपका योगदान</p>
