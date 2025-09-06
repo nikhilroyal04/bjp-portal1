@@ -1,8 +1,6 @@
 "use client"
 
-import { useState } from "react"
-import { Play, Menu, X, Phone, Mail, MapPin } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Phone, Mail, MapPin } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 
 const categories = [
@@ -15,7 +13,6 @@ const categories = [
 ]
 
 export default function PoliticalPortal() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   const handleCategoryClick = (categoryId: string) => {
     window.location.href = `/yojana/${categoryId}`
@@ -23,86 +20,26 @@ export default function PoliticalPortal() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Header */}
-      <header className="bg-primary text-primary-foreground shadow-lg">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-primary-foreground rounded-full flex items-center justify-center">
-                <span className="text-primary font-bold text-xl">🕉️</span>
-              </div>
-              <div>
-                <h1 className="text-2xl font-bold font-playfair">राजनीतिक पोर्टल</h1>
-                <p className="text-sm opacity-90">सेवा, सुशासन, गरीब कल्याण</p>
-              </div>
-            </div>
-
-            <nav className="hidden md:flex space-x-6">
-              <a href="/" className="hover:text-accent transition-colors">
-                मुख्य पृष्ठ
-              </a>
-              <a href="#" className="hover:text-accent transition-colors">
-                योजनाएं
-              </a>
-              <a href="#" className="hover:text-accent transition-colors">
-                समाचार
-              </a>
-              <a href="#" className="hover:text-accent transition-colors">
-                संपर्क
-              </a>
-            </nav>
-
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            >
-              {mobileMenuOpen ? <X /> : <Menu />}
-            </Button>
-          </div>
-
-          {/* Mobile Menu */}
-          {mobileMenuOpen && (
-            <nav className="md:hidden mt-4 pb-4 border-t border-primary-foreground/20">
-              <div className="flex flex-col space-y-2 pt-4">
-                <a href="/" className="hover:text-accent transition-colors py-2">
-                  मुख्य पृष्ठ
-                </a>
-                <a href="#" className="hover:text-accent transition-colors py-2">
-                  योजनाएं
-                </a>
-                <a href="#" className="hover:text-accent transition-colors py-2">
-                  समाचार
-                </a>
-                <a href="#" className="hover:text-accent transition-colors py-2">
-                  संपर्क
-                </a>
-              </div>
-            </nav>
-          )}
-        </div>
-      </header>
 
       {/* Video Banner */}
-      <section className="relative h-96 bg-gradient-to-r from-primary to-accent overflow-hidden">
+      <section className="relative h-[80vh] bg-gradient-to-r from-primary to-accent overflow-hidden">
         <div className="absolute inset-0 bg-black/20"></div>
-        <img
-          src="/bjp-political-rally-with-saffron-flags.jpg"
-          alt="Political Banner"
+        <video
+          src="/video.mp4"
           className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 flex items-center justify-center">
-          <Button
-            size="lg"
-            className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full p-6 shadow-2xl animate-pulse"
-          >
-            <Play className="w-8 h-8 ml-1" />
-          </Button>
-        </div>
+          autoPlay
+          loop
+          playsInline
+          poster="/placeholder.svg?key=2ntg5"
+        >
+          <source
+            src="/video.mp4"
+            type="video/mp4"
+          />
+        </video>
         <div className="absolute bottom-8 left-8 text-white">
-          <h2 className="text-4xl font-bold font-playfair mb-2">सबका साथ, सबका विकास</h2>
-          <p className="text-xl opacity-90">राष्ट्र निर्माण में आपका योगदान</p>
+          <h2 className="text-4xl text-red-500 font-bold font-playfair mb-2">सबका साथ, सबका विकास</h2>
+          <p className="text-xl text-red-500 opacity-90">राष्ट्र निर्माण में आपका योगदान</p>
         </div>
       </section>
 
