@@ -1,0 +1,232 @@
+"use client"
+
+import { useState } from "react"
+import { Play, Menu, X, Phone, Mail, MapPin } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+
+const categories = [
+  { id: "sports", name: "खेल", icon: "🏏" },
+  { id: "society", name: "समाज", icon: "🏛️" },
+  { id: "education", name: "शिक्षा", icon: "📚" },
+  { id: "development", name: "विकास", icon: "🏗️" },
+  { id: "employment", name: "रोजगार", icon: "💼" },
+  { id: "culture", name: "संस्कृति", icon: "🎭" },
+]
+
+export default function PoliticalPortal() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+
+  const handleCategoryClick = (categoryId: string) => {
+    window.location.href = `/yojana/${categoryId}`
+  }
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Header */}
+      <header className="bg-primary text-primary-foreground shadow-lg">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <div className="w-12 h-12 bg-primary-foreground rounded-full flex items-center justify-center">
+                <span className="text-primary font-bold text-xl">🕉️</span>
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold font-playfair">राजनीतिक पोर्टल</h1>
+                <p className="text-sm opacity-90">सेवा, सुशासन, गरीब कल्याण</p>
+              </div>
+            </div>
+
+            <nav className="hidden md:flex space-x-6">
+              <a href="/" className="hover:text-accent transition-colors">
+                मुख्य पृष्ठ
+              </a>
+              <a href="#" className="hover:text-accent transition-colors">
+                योजनाएं
+              </a>
+              <a href="#" className="hover:text-accent transition-colors">
+                समाचार
+              </a>
+              <a href="#" className="hover:text-accent transition-colors">
+                संपर्क
+              </a>
+            </nav>
+
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? <X /> : <Menu />}
+            </Button>
+          </div>
+
+          {/* Mobile Menu */}
+          {mobileMenuOpen && (
+            <nav className="md:hidden mt-4 pb-4 border-t border-primary-foreground/20">
+              <div className="flex flex-col space-y-2 pt-4">
+                <a href="/" className="hover:text-accent transition-colors py-2">
+                  मुख्य पृष्ठ
+                </a>
+                <a href="#" className="hover:text-accent transition-colors py-2">
+                  योजनाएं
+                </a>
+                <a href="#" className="hover:text-accent transition-colors py-2">
+                  समाचार
+                </a>
+                <a href="#" className="hover:text-accent transition-colors py-2">
+                  संपर्क
+                </a>
+              </div>
+            </nav>
+          )}
+        </div>
+      </header>
+
+      {/* Video Banner */}
+      <section className="relative h-96 bg-gradient-to-r from-primary to-accent overflow-hidden">
+        <div className="absolute inset-0 bg-black/20"></div>
+        <img
+          src="/bjp-political-rally-with-saffron-flags.jpg"
+          alt="Political Banner"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 flex items-center justify-center">
+          <Button
+            size="lg"
+            className="bg-primary hover:bg-primary/90 text-primary-foreground rounded-full p-6 shadow-2xl animate-pulse"
+          >
+            <Play className="w-8 h-8 ml-1" />
+          </Button>
+        </div>
+        <div className="absolute bottom-8 left-8 text-white">
+          <h2 className="text-4xl font-bold font-playfair mb-2">सबका साथ, सबका विकास</h2>
+          <p className="text-xl opacity-90">राष्ट्र निर्माण में आपका योगदान</p>
+        </div>
+      </section>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-4 py-12">
+        <div className="flex flex-col">
+          {/* Categories Section */}
+          <div className="w-full">
+            <h2 className="text-3xl font-bold font-playfair text-foreground mb-8 text-center">श्रेणियाँ</h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {categories.map((category) => (
+                <Card
+                  key={category.id}
+                  className="cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-105 border-2 border-border hover:border-primary/50"
+                  onClick={() => handleCategoryClick(category.id)}
+                >
+                  <CardContent className="p-6 text-center">
+                    <div className="text-4xl mb-4">{category.icon}</div>
+                    <h3 className="text-xl font-bold font-playfair text-foreground mb-2">{category.name}</h3>
+                    <div className="w-12 h-1 bg-primary mx-auto rounded-full"></div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-primary text-primary-foreground mt-16">
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <h3 className="text-xl font-bold font-playfair mb-4">राजनीतिक पोर्टल</h3>
+              <p className="text-sm opacity-90 mb-4">सेवा, सुशासन और गरीब कल्याण के लिए समर्पित</p>
+              <div className="flex space-x-4">
+                <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+                  <span className="text-xs">📘</span>
+                </div>
+                <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+                  <span className="text-xs">🐦</span>
+                </div>
+                <div className="w-8 h-8 bg-accent rounded-full flex items-center justify-center">
+                  <span className="text-xs">📺</span>
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">मुख्य लिंक</h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <a href="/" className="hover:text-accent transition-colors">
+                    मुख्य पृष्ठ
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-accent transition-colors">
+                    योजनाएं
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-accent transition-colors">
+                    समाचार
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-accent transition-colors">
+                    गैलरी
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">सेवाएं</h4>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <a href="#" className="hover:text-accent transition-colors">
+                    ऑनलाइन आवेदन
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-accent transition-colors">
+                    शिकायत निवारण
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-accent transition-colors">
+                    डाउनलोड
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="hover:text-accent transition-colors">
+                    FAQ
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 className="font-semibold mb-4">संपर्क जानकारी</h4>
+              <div className="space-y-3 text-sm">
+                <div className="flex items-center space-x-2">
+                  <Phone className="w-4 h-4" />
+                  <span>+91 11 2334 5678</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <Mail className="w-4 h-4" />
+                  <span>info@politicalportal.gov.in</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <MapPin className="w-4 h-4" />
+                  <span>नई दिल्ली, भारत</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="border-t border-primary-foreground/20 mt-8 pt-8 text-center text-sm">
+            <p>&copy; 2024 राजनीतिक पोर्टल। सभी अधिकार सुरक्षित।</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}
